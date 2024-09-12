@@ -1,6 +1,6 @@
 # $$Tópicos - Semana$$ $$3$$
 ### 1. Qual a distinção entre sistemas em geral e sistemas de software?
-Enquanto o software se refere especificamente aos programas de computador e dados relacionados que fornecem instruções para o funcionamento do computador, o sistema abrange um conjunto mais amplo de componentes interconectados que trabalham juntos para realizar uma função específica. Em outras palavras, o software é uma parte do sistema, mas o sistema não se limita apenas ao software.
+Enquanto o software se refere especificamente aos programas de computador e dados relacionados que fornecem instruções para o funcionamento do computador, o sistema abrange um conjunto mais amplo de componentes interconectados que trabalham juntos para realizar uma função específica. Em outras palavras, o software é uma parte do sistema, mas o sistema não se limita apenas ao software, por exemplo não existe software sem hardware, que seria outra parte do sistema.
 #
 ### 2. A norma ISO/IEC/IEEE 12207:2017 possui um processo específico para projeto (design) de software? Se afirmativo, qual seria este processo?
 Sim, a norma possui o Processo de Projeto de Software (Software Design Process).
