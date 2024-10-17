@@ -12,7 +12,7 @@ Nesta iteração devemos escolher qual o design e a tecnologia a fim de implemen
 Como Architecture Drivers para a segunda iteração, **desconsiderando Extensibility, Cost e Environment que são drivers para todas as iterações**, temos:
 
 * Quality Atributes
-```
+```cpp
 Performance -> Q1: "The system shall collect 10000 raw events/sec in average from up to 300 web servers."
 
 Compatibility -> Q6: "The system shall be composed of components that peferably integrate to each other with no
@@ -29,7 +29,15 @@ Um Data Collector é responsável por coletar, transformar e enviar dados de vá
 * Capturar dados em tempo real ou em lote.
 * Realizar transformações básicas nos dados, como limpeza e formatação.
 * Enviar os dados para diferentes destinos (armazenamento, processamento ou sistemas de monitoramento).
-Em geral, o Data Collector é utilizado em pipelines de ETL (Extract, Transform, Load) e em sistemas de monitoramento de logs (nosso caso), sensores IoT, e outros cenários onde é necessário agregar e centralizar dados de **diversas** origens, o que está de acordo com nosso driver **Compatibility**.
+Em geral, o Data Collector é utilizado em pipelines de ETL (Extract, Transform, Load) e em sistemas de monitoramento de logs (nosso caso), sensores IoT, e outros cenários onde é necessário agregar e centralizar dados de **diversas** origens, o que está de acordo com nosso driver ```Compatibility -> Q6```.
+
+A carta de Data Collector em relação aos nossos drivers, no jogo:
+```python
+★★ Performance – can handle large amounts of data in real time
+★★★ Compatibility – can be plugged with popular event sources and 
+destinations
+```
+
 
 ### 2. Distributed Message Broker (Blue Cards)
 Um Distributed Message Broker é um sistema que gerencia a troca de mensagens entre produtores e consumidores em um ambiente distribuído. É um descendente do Message Broker, mas de forma distribuída. Ele serve como intermediário entre serviços ou componentes de um sistema, permitindo que eles se comuniquem de maneira assíncrona e escalável.
@@ -37,6 +45,13 @@ Um Distributed Message Broker é um sistema que gerencia a troca de mensagens en
 * Mensageria Assíncrona: Permite que produtores enviem mensagens e consumidores as processem em momentos diferentes, desacoplando os sistemas.
 * Distribuição de Mensagens: Redireciona e entrega mensagens para vários consumidores com base em regras e configurações (ex.: filas, tópicos).
 * Tolerância a Falhas e Escalabilidade: Geralmente, esses sistemas são projetados para funcionar de forma distribuída, garantindo que as mensagens sejam entregues mesmo se algum nó falhar.
+
+A carta de Distributed Message Broker em relação aos nossos drivers, no jogo:
+```python
+★★★ Performance – can handle high throughput with low latency
+★ Compatibility – in most cases requires writing of custom code to be 
+plugged with event producers and consumers
+```
 
 Apesar da melhor performance do Distributed Message Broker, escolheremos o Data Collector para nossa iteração, já que neste trade-off entre Performance e Compatibilidade, o Data Collector oferece uma compatibilidade melhor para uma não tão ruim performance, comparada ao Distributed Message Broker.
 
