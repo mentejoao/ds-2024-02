@@ -12,16 +12,19 @@ Nesta iteração devemos escolher qual o design e a tecnologia a fim de implemen
 Como Architecture Drivers para a segunda iteração, **desconsiderando Extensibility, Cost e Environment que são drivers para todas as iterações**, temos:
 
 * Quality Atributes
-```cpp
+```cpp  
 Performance -> Q1: "The system shall collect 10000 raw events/sec in average from up to 300 web servers."
 
 Compatibility -> Q6: "The system shall be composed of components that peferably integrate to each other with no
-                      or miniumum custom coding." 
+
+                    or miniumum custom coding." 
 
 Reliability -> Q7: "The data collection and event delivery mechanism shall be reliable (no message loss)"
 ```
 
-Como possíveis opções de design temos o Data Collector e o Distributed Message Broker, aqui explanarei melhor um pouco sobre os dois.
+Como possíveis opções de design para a resolução do Fluxo de Logs temos o Data Collector e o Distributed Message Broker, aqui explanarei melhor um pouco sobre os dois.
+
+# Design
 
 #### 1. Data Colector (Blue Cards)
 Um Data Collector é responsável por coletar, transformar e enviar dados de várias fontes para um destino centralizado (como um banco de dados, sistema de armazenamento ou um message broker). Ele funciona como um ponto de entrada para os dados e pode ser configurado para realizar tarefas como:
@@ -38,7 +41,6 @@ A carta de Data Collector em relação aos nossos drivers, no jogo:
 destinations
 ```
 
-
 ### 2. Distributed Message Broker (Blue Cards)
 Um Distributed Message Broker é um sistema que gerencia a troca de mensagens entre produtores e consumidores em um ambiente distribuído. É um descendente do Message Broker, mas de forma distribuída. Ele serve como intermediário entre serviços ou componentes de um sistema, permitindo que eles se comuniquem de maneira assíncrona e escalável.
 
@@ -53,5 +55,59 @@ A carta de Distributed Message Broker em relação aos nossos drivers, no jogo:
 plugged with event producers and consumers
 ```
 
-Apesar da melhor performance do Distributed Message Broker, escolheremos o Data Collector para nossa iteração, já que neste trade-off entre Performance e Compatibilidade, o Data Collector oferece uma compatibilidade melhor para uma não tão ruim performance, comparada ao Distributed Message Broker.
+#### Smart Decision 1
+Apesar da melhor performance do Distributed Message Broker, escolheremos o Data Collector para nossa iteração, já que neste trade-off entre Performance e Compatibilidade, o Data Collector oferece uma compatibilidade melhor para uma não tão ruim performance, comparada ao Distributed Message Broker. Agora, escolhido o design Data Collector, de que modo vamos implementá-lo?
+
+# Tecnologia
+### 1. Apache Flume (Red Cards)
+* O Apache Flume é um serviço que permite coletar, agregar e mover grandes quantidade de dados em um ambiente distribuído. De diferentes fontes de dados, como em social media, e-mails, logs e qualquer fonte de dados possível.
+* O Apache Flume foi desenvolvido pela Cloudera e é escrito em Java.
+* Iniciou-se como Open Source e é licenciada pela Apache 2.0.
+  
+A carta de Apache Flume em relação aos nossos drivers, no jogo:
+```python
+★★ Performance – can handle high throughput with low latency, depends on
+channel configuration (memory, file etc.), number of sinks, threads etc.
+Supports horizontal scaling for performance (throughput) improvement.
+★★ Reliability – uses a transactional approach to guarantee the reliable
+delivery of events (via a file channel). Usage of a memory channel improves
+performance, but can lead to message loss.
+```
+* Arquitetura de uma implementação com o Apache Flume
+  
+![image](https://github.com/user-attachments/assets/da06a2d5-f470-4b79-988a-d90e04cb1d1d)
+
+Refs.:
+[Apache Flume](https://flume.apache.org/FlumeUserGuide.html)
+[Medium - Introdução. O que é o Apache Flume?](https://medium.com/apache-flume/introdu%C3%A7%C3%A3o-b5c0c97b5634)
+[Oracle - Usando o Apache Flume](https://docs.oracle.com/pt-br/iaas/Content/bigdata/hadoop-odh-flume.htm)
+### 2. Logstash (Red Cards)
+* O Logstash é um pipeline gratuito e aberto de processamento de dados do lado do servidor que faz a ingestão de dados de inúmeras fontes, transforma-os e envia-os para o seu “esconderijo” favorito.
+* O Logstash faz dinamicamente ingestões, transformações e envios dos dados independentemente do formato e da complexidade.
+* O Logstash  foi desenvolvimento pela Elastic e é escrito em JRuby, sendo necessário uma JVM para rodá-lo.
+* Iniciou-se como Open Source e é licenciada pela Apache 2.0.
+
+A carta do Logstash em relação aos nossos drivers, no jogo:
+```python
+★★ Performance – can handle high throughput with low latency (via
+leveraging multiple threads for filter workers, input/output workers etc.,
+adding more instances)
+★★ Reliability – depends on broker implementation, reported issues with
+losing messages
+```
+  
+  * Arquitetura de uma implementação com o Logstash:
+    
+![image](https://github.com/user-attachments/assets/527ec72d-f8f7-42ad-aaa2-f90d0646b457)
+
+Refs.:
+[Logstash](https://www.elastic.co/pt/logstash)
+
+### 3. Fluentd (Red Cards)
+
+
+
+
+#### Smart Decision 2
+...
 
