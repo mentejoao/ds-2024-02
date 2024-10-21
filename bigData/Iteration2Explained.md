@@ -62,7 +62,7 @@ Apesar da melhor performance do Distributed Message Broker, escolheremos o Data 
 ### 1. Apache Flume (Red Cards)
 * O Apache Flume é um serviço que permite coletar, agregar e mover grandes quantidade de dados em um ambiente distribuído. De diferentes fontes de dados, como em social media, e-mails, logs e qualquer fonte de dados possível.
 * O Apache Flume foi desenvolvido pela Cloudera e é escrito em Java.
-* Iniciou-se como Open Source e é licenciada pela Apache 2.0.
+* É Open Source e é licenciado pela Apache 2.0.
   
 A carta de Apache Flume em relação aos nossos drivers, no jogo:
 ```python
@@ -84,8 +84,8 @@ Refs.:
 ### 2. Logstash (Red Cards)
 * O Logstash é um pipeline gratuito e aberto de processamento de dados do lado do servidor que faz a ingestão de dados de inúmeras fontes, transforma-os e envia-os para o seu “esconderijo” favorito.
 * O Logstash faz dinamicamente ingestões, transformações e envios dos dados independentemente do formato e da complexidade.
-* O Logstash  foi desenvolvimento pela Elastic e é escrito em JRuby, sendo necessário uma JVM para rodá-lo.
-* Iniciou-se como Open Source e é licenciada pela Apache 2.0.
+* O Logstash foi desenvolvimento pela Elastic e é escrito em JRuby, sendo necessário uma JVM para rodá-lo.
+* É Open Source e é licenciado pela Apache 2.0.
 
 A carta do Logstash em relação aos nossos drivers, no jogo:
 ```python
@@ -104,8 +104,37 @@ Refs.:
 [Logstash](https://www.elastic.co/pt/logstash)
 
 ### 3. Fluentd (Red Cards)
+* Fluentd é um Data Collector que unifica a coleção e o consumo dos dados para um melhor uso dos dados.
+* Utiliza JSON como um formato de dados interno para unificar toda a coleta, filtros, buffers e mecanismos de output para levar os dados da fonte até o destino.
+* O Fluentd foi escrito em C e em Ruby
+* É Open Source e é licenciado pela Apache 2.0
+
+* Alguns casos de uso disponíveis na [documentação oficial](https://docs.fluentd.org/quickstart)
+  1. Data Search
+  2. Data filtering and Alerting
+  3. Data Analytics with Treasure Data
+  4. Data Collection to MongoDB
+  5. Data Collection to HDFS (caso de uso mais comum entre os 3)
+  6. Data Archiving to Amazon S3
+ 
+A carta do Fluentd em relação aos nossos drivers, no jogo:
+```python
+★★ Performance – requires very little system resources. The vanilla 
+instance runs on 30-40MB of memory and can process 13,000 
+events/second/core.
+★★★ Reliability – supports memory- and file-based buffering to prevent 
+inter-node data loss. The buffering logic is highly tunable and can be 
+customized for various throughput/latency requirements.
+```
+
+ * Arquitetura do caso de uso 5 (Data Collection to HDFS)
+
+   
+![image](https://github.com/user-attachments/assets/c7f4130d-e341-4e38-9301-19444ece9388)
 
 
+Casos de Usos Gerais do Fluentd
+![image](https://github.com/user-attachments/assets/337aa14b-6a1a-4c34-8c25-ee9a4ce845a7)
 
 
 #### Smart Decision 2
