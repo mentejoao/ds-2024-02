@@ -21,6 +21,11 @@ Performance -> Q3: "The system shall provide ad-hoc analysis over historical dat
                     with human-time queries (< 1 min query execution time) historical
                     for Data Analysts" 
 ```
+* Constraints
+```cpp  
+Environment -> C3: "The system shall use corporate BI tool with SQL interface
+                    for static reports (e.g. MicroStrategy, QlikView, Tableau)"
+```
 Sendo assim, para design iremos priorizar Ad-hoc Analysis e Performance, enquanto para tecnologia vamos priorizar apenas Performance.
 Como possíveis opções de desing temos Column-Family, Document-Oriented e Interactive Query Engine.
 
