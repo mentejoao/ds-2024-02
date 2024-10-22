@@ -1,9 +1,11 @@
 # Iteration 3
 
-Conforme o padrão arquitetural Lambda, a terceira fase envolve a decomposição da Batch Layer (ou Camada de Lote). 
+Conforme o padrão arquitetural Lambda, a terceira fase envolve a decomposição da Batch Layer (ou Camada de Lote).
+
 ![image](https://github.com/user-attachments/assets/64dd573c-011b-41cb-b74c-c91a471520d0)
 
 Ela é a responsável por processar grandes volumes de dados de forma periódica, geralmente em ciclos pré-definidos, como diários, semanais ou mensais. Ela lida com dados históricos ou de longo prazo, realizando o processamento em lote para criar um conjunto mestre de dados. Esses dados são então pré-computados para gerar visões agregadas ou "views", que são posteriormente disponibilizadas para outras camadas do sistema, como a Serving Layer.
+
 ![image](https://github.com/user-attachments/assets/43769f69-2f2a-432e-a079-20a6d0352861)
 
 ## Premissas
