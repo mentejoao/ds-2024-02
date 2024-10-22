@@ -61,7 +61,7 @@ Em relação aos drivers analisados nessa iteração, a carta de Document-Orient
 ★★ Performance – performance varies significantly from one implementation to the next,
                   but overall not as fast as Key-Value databases
 
-★½ Ad-hoc analysis – somewhat better than other NoSQL families, but still not
+★½ Ad-hoc Analysis – somewhat better than other NoSQL families, but still not
                       as good as relational databases or interactive query engines
 ```
 
@@ -77,7 +77,7 @@ Em relação aos drivers analisados nessa iteração, a carta de Interactive Que
 ★★ Performance – can query large amounts of data in human-time (2-30 seconds),
                   however still not as fast as relational data warehouse
 
-★½ Ad-hoc analysis – somewhat better than other NoSQL families, but still not
+★½ Ad-hoc Analysis – somewhat better than other NoSQL families, but still not
                       as good as relational databases or interactive query engines
 ```
 
