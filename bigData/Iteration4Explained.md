@@ -8,7 +8,7 @@ requisitos para chegar na melhor escolha possível de acordo com o nosso context
 
 ![lambdaarq](https://github.com/user-attachments/assets/37053cbb-5a65-4b60-856b-9f52a7c53a4a)
 
-# Premissas
+## Premissas
 ### Architecture Drivers
 Para essa iteração em específico, como drivers de arquitetura, temos:
 * Quality Atributes
@@ -29,7 +29,7 @@ Environment -> C3: "The system shall use corporate BI tool with SQL interface
 Sendo assim, para design iremos priorizar Ad-hoc Analysis e Performance, enquanto que para tecnologia vamos priorizar apenas Performance.
 Como possíveis opções de desing temos Column-Family, Document-Oriented e Interactive Query Engine.
 
-# Design
+## Design
 ### 1. Column-Family (Blue Card)
 Column-Family é um tipo de modelagem de dados usada em bancos de dados NoSQL, caracterizada por conter um conjunto de linhas,
 onde cada uma delas é um conjunto de pares chave-valor chamados colunas. Podem ser apresentados como matrizes bidimensionais em que
@@ -85,7 +85,7 @@ Em relação aos drivers analisados nessa iteração, a carta de Interactive Que
 Apesar de possuir a melhor "Performance", o modelo de design "Column-Family" peca no quesito "Ad-hoc Analysis", sendo o de pior desempenho entre os três analisados. Juntamente com ele, temos o "Document-Oriented", que também se encontra com um péssimo "Ad-hoc Analysis" sendo apenas 0.5 estrelas melhor que o modelo de design analisado anteriormente, já na sua questão de "Performance", consegue ter um bom desempenho, porém nada excepcional. E por último, temos o "Interactive Query Engine" que possui o melhor equilíbrio entre os drivers observados, possuindo o melhor "Ad-hoc analysis" entre os modelos e uma "Performance" igual ao do "Document-Oriented", porém, inferior ao do "Column-Family", mas como estamos prezando pelo equilíbrio, ele foi o escolhido.  
 Agora, dado o design escolhido (Interactive Query Engine), qual tecnologia iremos usar para implementá-lo?
 
-# Tecnologias
+## Tecnologias
 ### 1. Impala (Red Card)
 Nossa primeira opção de tecnologia é o Apache Impala, ele é um mecanismo de consulta SQL de processamento massivamente paralelo de código aberto para dados armazenados em um cluster de computador executando o Apache Hadoop.
 
@@ -127,3 +127,6 @@ Em relação aos drivers de interesse dessa iteração, o Apache Hive é avaliad
 ```
 
 ### Smart Decision 2 - Tecnologia
+Primeiro descartaremos o "Apache Hive" pois possui a pior "Performance" dentre as tecnologias disponíveis para nossa escolha. Dito isso, ficamos com as duas opções restantes "Impala" e "Spark SQL", a primeira vista já percebemos que ambos possuem o mesmo nível de "Performance", três estrelas, dito isso, teremos que observar outra característica, que será a "Reliability". Ao olharmos para a "Reliability" do "Impala" percebemos que é necessário reiniciar as consultas caso um nó falhe, característica que vai contra o atributo de qualidade número 10 - "The system shall survive and continue operating if any of its node or component is failed", dito isso o excluímos também. Logo, escolheremos o "Spark SQL", pois possui recuperação de falhas e suporta consultas de longa duração.
+
+## :arrow_right: [Iteration 5](https://github.com/mentejoao/ds-2024-02/blob/main/bigData/Iteration5Explained.md)
