@@ -71,9 +71,60 @@ Em relação aos drivers analisados nessa iteração, a carta de Document-Orient
                       stat functions and simple joins to query, analyze and visualize data.
 ```
 
-### Smart Decision 1
+### Smart Decision 1 - Design
 Dado o cenário que foi estabelecido de "um sistema que envolve armazenamento e análise de um conjunto de massivo de dados
 semi-estruturados vindos de centenas de servidores", a melhor escolha nesse caso é o Distributed Search Engine, que vence
 os outros modelos nos drivers de arquitetura escolhidos para avaliação. Além disso, também satisfaz as constraints e
 atributos de qualidade, por se tratar de um mecanismo distribuído, com boa capacidade de análise ad-hoc e busca full-text.
 
+# Tecnologias
+### Splunk Indexer
+A primeira opção de tecnologia de análise, busca e consulta para o Mecanismo de Busca Distribuído é o Splunk Indexer, 
+um componente do Splunk que processa os dados enviados ao sistema, armazenando-os em índices para que possam ser localizados 
+rapidamente. O Indexer também realiza outras funções fundamentais do Splunk, como a entrada de dados e a gestão de pesquisas.
+Junto com outros componentes do Splunk, o Indexer cria um solução maior que fornece gráficos, relatórios, alertas, painéis
+e visualizações.
+
+![image](https://github.com/user-attachments/assets/04917232-4187-4813-acd8-a7eb85a19c4c)
+
+Em relação aos drivers de interesse dessa iteração, o Splunk Indexer é avaliado como:
+```python
+★★½ Real-time analysis – enables near real time indexing with about a
+                          second latency.
+```
+
+### Elasticsearch
+Outra opção de tecnologia é a Elasticsearch, um software de motor de busca baseado na biblioteca Apache Lucene (uma biblioteca 
+para motores de busca desenvolvida em Java sob uma licença de código livre, originalmente criada por Doug Cutting e mantida 
+pela Apache Software Foundation), providenciando um banco de dados distribuído com índice reverso que permite busca em texto-livre 
+em tempo real. Possui uma interface web HTTP e armazena os documentos no formato JSON.
+
+Além de busca, pode ser usado também para monitoramento sintético, de log, de infraestrutura e segurança de endpoint.
+
+![image](https://github.com/user-attachments/assets/f1d8c489-418a-4741-9cbd-2676ffc9c1d7)
+
+Em relação aos drivers de interesse dessa iteração, o Elasticsearch é avaliado como:
+```python
+★★½ Real-time analysis – enables near real time indexing with about a
+                          second latency.
+```
+
+### Apache Solr
+A última opção de opção e tecnologia para o Mecanismo de Busca Distribuído é o Apache Solr, um servidor de busca também baseado
+na biblioteca Apache Lucene e escrito em Java. O Solr é altamente escalável e adotado por váriosde fornecedores de Big Data, 
+como Cloudera e Amazon Web Services. Em relação as outras tecnologias, o Solr é mais comum em cenários de busca estruturada 
+e com requisitos específicos de faceting.
+
+![image](https://github.com/user-attachments/assets/d8144875-fe2d-477f-9035-66f0a798bf7c)
+
+Em relação aos drivers de interesse dessa iteração, o Apache Solr é avaliado como:
+```python
+★★½ Real-time analysis – enables near real time indexing with about a
+                          second latency
+```
+
+### Smart Decision 2 - Tecnologia
+Como todas as tecnologias possuem o driver de arquitetura de interesse avaliado em 2,5 estrelas, a decisão foi tomada com base
+nas peculiaridades e afinidade com o nosso sistema, levando em conta os quality attributes e as constraints. Dessa maneira,
+por possuir fácil integração com o sistema de dashboard interativo Kibana e permitir realizar buscas full-text, além de ser
+open source, a escolha de tecnologia é o Elasticsearch.
