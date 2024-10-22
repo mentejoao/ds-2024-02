@@ -10,7 +10,7 @@ Ela é a responsável por processar grandes volumes de dados de forma periódica
 
 ## Premissas
 ### Architecture Drivers
-Os Architecture Drivers para a segunda iteração, excluindo Extensibility, Cost e Environment, que se aplicam a todas as iterações, são os seguintes:
+Os Architecture Drivers para a terceira iteração, excluindo Extensibility, Cost e Environment, que se aplicam a todas as iterações, são os seguintes:
 * Quality Atributes
 ```cpp  
 Scalability - > Q9: The system shall store raw data for the last 60 days (~1 TB of raw data per day, ~60 TB in total)
