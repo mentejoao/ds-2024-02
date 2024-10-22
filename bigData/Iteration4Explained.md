@@ -82,8 +82,8 @@ Em relação aos drivers analisados nessa iteração, a carta de Interactive Que
 ```
 
 ### Smart Decision 1 - Design
-
-...
+Apesar de possuir a melhor "Performance", o modelo de design "Column-Family" peca no quesito "Ad-hoc Analysis", sendo o de pior desempenho entre os três analisados. Juntamente com ele, temos o "Document-Oriented", que também se encontra com um péssimo "Ad-hoc Analysis" sendo apenas 0.5 estrelas melhor que o modelo de design analisado anteriormente, já na sua questão de "Performance", consegue ter um bom desempenho, porém nada excepcional. E por último, temos o "Interactive Query Engine" que possui o melhor equilíbrio entre os drivers observados, possuindo o melhor "Ad-hoc analysis" entre os modelos e uma "Performance" igual ao do "Document-Oriented", porém, inferior ao do "Column-Family", mas como estamos prezando pelo equilíbrio, ele foi o escolhido.  
+Agora, dado o design escolhido (Interactive Query Engine), qual tecnologia iremos usar para implementá-lo?
 
 # Tecnologias
 ### 1. Impala (Red Card)
@@ -127,5 +127,3 @@ Em relação aos drivers de interesse dessa iteração, o Apache Hive é avaliad
 ```
 
 ### Smart Decision 2 - Tecnologia
-
-...
