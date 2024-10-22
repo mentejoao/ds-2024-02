@@ -123,7 +123,7 @@ resultado: 14 ★ e ½
 ```
 
 #### Smart Decision
-Considerando [Análise  Ad-Hoc,  Análise  em  tempo  real,  Processamento  de  dados  não  estruturados,  Escalabilidade,  Economia  de  custos] se torna inerrefutável que a melhor opção é a arquitetura lambda,
+Considerando [Análise  Ad-Hoc,  Análise  em  tempo  real,  Processamento  de  dados  não  estruturados,  Escalabilidade,  Economia  de  custos] se torna irrefutável que a melhor opção é a arquitetura lambda,
 que contempla da melhor forma todos os requisitos do cenário de jogo, além de saber que se conecta com a proposta relatada incialmente:
  * Inteligência em Tempo Real: Permite que a equipe de operações monitore serviços online em tempo real, com baixa latência, para detectar e responder rapidamente a problemas.
 
