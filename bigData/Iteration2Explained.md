@@ -63,6 +63,28 @@ Apesar da melhor performance do Distributed Message Broker, escolheremos o Data 
 * O Apache Flume é um serviço que permite coletar, agregar e mover grandes quantidade de dados em um ambiente distribuído. De diferentes fontes de dados, como em social media, e-mails, logs e qualquer fonte de dados possível.
 * O Apache Flume foi desenvolvido pela Cloudera e é escrito em Java.
 * É Open Source e é licenciado pela Apache 2.0.
+* Menos amigável em comparação com Fluentd e Logstash, pois exige uma compreensão mais detalhada da arquitetura de fluxo.
+
+  
+ Exemplo de arquivo de configuração do Apache Flume (flume.conf). A sintaxe é um menos intuitiva que Fluentd e Logstash, sendo baseada em propriedades com a definição de source, channel e sink:
+
+```bash
+agent.sources = source1
+agent.channels = channel1
+agent.sinks = sink1
+
+agent.sources.source1.type = exec
+agent.sources.source1.command = tail -F /var/log/syslog
+
+agent.channels.channel1.type = memory
+
+agent.sinks.sink1.type = hdfs
+agent.sinks.sink1.hdfs.path = hdfs://localhost:9000/logs/
+agent.sinks.sink1.channel = channel1
+```
+* Arquitetura de uma implementação com o Apache Flume
+  
+![image](https://github.com/user-attachments/assets/da06a2d5-f470-4b79-988a-d90e04cb1d1d)
   
 A carta de Apache Flume em relação aos nossos drivers, no jogo:
 ```python
@@ -73,9 +95,6 @@ Supports horizontal scaling for performance (throughput) improvement.
 delivery of events (via a file channel). Usage of a memory channel improves
 performance, but can lead to message loss.
 ```
-* Arquitetura de uma implementação com o Apache Flume
-  
-![image](https://github.com/user-attachments/assets/da06a2d5-f470-4b79-988a-d90e04cb1d1d)
 
 Refs.:
 [Apache Flume](https://flume.apache.org/FlumeUserGuide.html)
@@ -85,7 +104,36 @@ Refs.:
 * O Logstash é um pipeline gratuito e aberto de processamento de dados do lado do servidor que faz a ingestão de dados de inúmeras fontes, transforma-os e envia-os para o seu “esconderijo” favorito.
 * O Logstash faz dinamicamente ingestões, transformações e envios dos dados independentemente do formato e da complexidade.
 * O Logstash foi desenvolvimento pela Elastic e é escrito em JRuby, sendo necessário uma JVM para rodá-lo.
-* É Open Source e é licenciado pela Apache 2.0.
+* Suporte Multithreading
+* É Open Source e é licenciado pela Apache 2.0, entretanto é mantido e desenvolvido utilizando Elastic.
+* Possui uma sintaxe bem verbosa, o que garante mais flexibilidade, mas uma curva de aprendizagem mais elevada, mais fácil que o Apache Flume e mais difícil que o Fluentd
+
+Exemplo de arquivo de configuração do Logstash (logstash.conf). Ele utiliza uma estrutura com seções de input, filter e output. O formato é similar ao Fluentd, mas é bem mais verboso:
+
+```bash
+input {
+  file {
+    path => "/var/log/syslog"
+    start_position => "beginning"
+  }
+}
+
+filter {
+  grok {
+    match => { "message" => "%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} %{DATA:program}: %{GREEDYDATA:message}" }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["localhost:9200"]
+  }
+}
+```
+
+* Arquitetura de uma implementação com o Logstash:
+    
+![image](https://github.com/user-attachments/assets/527ec72d-f8f7-42ad-aaa2-f90d0646b457)
 
 A carta do Logstash em relação aos nossos drivers, no jogo:
 ```python
@@ -95,10 +143,6 @@ adding more instances)
 ★★ Reliability – depends on broker implementation, reported issues with
 losing messages
 ```
-  
-  * Arquitetura de uma implementação com o Logstash:
-    
-![image](https://github.com/user-attachments/assets/527ec72d-f8f7-42ad-aaa2-f90d0646b457)
 
 Refs.:
 [Logstash](https://www.elastic.co/pt/logstash)
@@ -107,7 +151,10 @@ Refs.:
 * Fluentd é um Data Collector que unifica a coleção e o consumo dos dados para um melhor uso dos dados.
 * Utiliza JSON como um formato de dados interno para unificar toda a coleta, filtros, buffers e mecanismos de output para levar os dados da fonte até o destino.
 * O Fluentd foi escrito em C e em Ruby
+* Não tem suporte multithread.
+* É muito eficiente em termos de memória.
 * É Open Source e é licenciado pela Apache 2.0
+* Possui uma sintaxe de simples aprendizagem.
 
 * Alguns casos de uso disponíveis na [documentação oficial](https://docs.fluentd.org/quickstart)
   1. Data Search
@@ -116,6 +163,35 @@ Refs.:
   4. Data Collection to MongoDB
   5. Data Collection to HDFS (caso de uso mais comum entre os 3)
   6. Data Archiving to Amazon S3
+  
+Exemplo de arquivo de configuração do Fluentd (um arquivo em YAML chamado fluent.conf com uma estrutura simples com blocos para entradas (inputs), filtros (filters) e saídas (outputs)):
+```yaml
+<source>
+  @type tail
+  path /var/log/syslog
+  pos_file /var/log/td-agent/syslog.pos
+  tag syslog
+  format syslog
+</source>
+
+<match syslog>
+  @type forward
+  <server>
+    host logserver
+    port 24224
+  </server>
+</match>
+ ```
+
+* Arquitetura do caso de uso 5 (Data Collection to HDFS)
+
+   
+![image](https://github.com/user-attachments/assets/c7f4130d-e341-4e38-9301-19444ece9388)
+
+
+Casos de Usos Gerais do Fluentd
+![image](https://github.com/user-attachments/assets/337aa14b-6a1a-4c34-8c25-ee9a4ce845a7)
+
  
 A carta do Fluentd em relação aos nossos drivers, no jogo:
 ```python
@@ -127,16 +203,13 @@ inter-node data loss. The buffering logic is highly tunable and can be
 customized for various throughput/latency requirements.
 ```
 
- * Arquitetura do caso de uso 5 (Data Collection to HDFS)
 
-   
-![image](https://github.com/user-attachments/assets/c7f4130d-e341-4e38-9301-19444ece9388)
-
-
-Casos de Usos Gerais do Fluentd
-![image](https://github.com/user-attachments/assets/337aa14b-6a1a-4c34-8c25-ee9a4ce845a7)
 
 
 #### Smart Decision 2
-...
+Como o Fluentd tem uma confiabilidade maior frente às outras tecnologias, enquanto possui uma performance não distante das concorrentes, escolheremos esta opção para implementação do nosso Data Collector. Além de sua sintaxe e curva de aprendizagem ser bem facilitada para os desenvolvedores que trabalharão na manutenção do nosso código.
+
+Outras referências:
+
+[Fluentd vs Logstash](https://www.geeksforgeeks.org/difference-between-fluentd-and-logstash/)
 
