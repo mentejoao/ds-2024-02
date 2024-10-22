@@ -13,9 +13,9 @@ Ela é a responsável por processar grandes volumes de dados de forma periódica
 Os Architecture Drivers para a terceira iteração, excluindo Extensibility, Cost e Environment, que se aplicam a todas as iterações, são os seguintes:
 * Quality Atributes
 ```cpp  
-Scalability - > Q9: The system shall store raw data for the last 60 days (~1 TB of raw data per day, ~60 TB in total)
+Scalability - > Q9: O sistema armazenará dados brutos dos últimos 60 dias (~1 TB de dados brutos por dia, ~60 TB no total)
 
-Availability -> Q10: The system shall survive and continue operating if any of its node or component is failed
+Availability -> Q10: O sistema sobreviverá e continuará operando se algum de seus nós ou componentes falhar
 ```
 Vamos priorizar os seguintes fatores para a iteração:
  - Escalabilidade: É fundamental garantir que o sistema possa crescer e se adaptar a um aumento na carga de trabalho e no volume de dados sem comprometer seu desempenho.
@@ -35,11 +35,11 @@ cada chave possui um ou mais pares de valores-chave anexados a ela.
 
 Em relação aos drivers analisados nessa iteração, a carta de Column-Family é avaliada como:
 ```python
-★★★ Scalability – can be linearly scaled by splitting data across servers 
-                    using hash value calculated based on a row key
+★★★ Scalability – pode ser dimensionado linearmente dividindo os dados entre servidores 
+                    usando valor hash calculado com base em uma chave de linha
 
-★★★ Availability – high availability is provided by clustering and 
-                     distributed file system (e.g. HDFS)
+★★★ Availability – alta disponibilidade é fornecida por clustering e 
+                     sistema de arquivos distribuído (por exemplo, HDFS)
 ```
 
 ### 2. Document-Oriented (Blue Card)
@@ -53,11 +53,11 @@ documentos, que podem ser aninhados (um documento dentro de outro documento dent
 
 Em relação aos drivers analisados nessa iteração, a carta de Document-Oriented é avaliada como:
 ```python
-★★★ Scalability – over 100 organizations run clusters with 100+ nodes. 
-                    Some clusters exceed 1,000 nodes
+★★★ Scalability – mais de 100 organizações executam clusters com mais de 100 nós. 
+                    Alguns clusters excedem 1.000 nós
 
-★★★ Availability – high availability is provided by clustering and 
-                     replication
+★★★ Availability – alta disponibilidade é fornecida por clustering e 
+                     replicação
 
 ```
 
@@ -70,12 +70,12 @@ Os modernos sistemas de arquivos distribuídos são altamente tolerantes a falha
 
 Em relação aos drivers analisados nessa iteração, a carta de Distributed File System é avaliada como:
 ```python
-★★★ Scalability – massively and linearly scalable, number of nodes 
-                    theoretically is unlimited, existing production clusters with up to 10,000 
-                    nodes
+★★★ Scalability – massivamente e linearmente escalável, número de nós 
+                    teoricamente é ilimitado, clusters de produção existentes com até 10.000 
+                    nós
 
-★★★ Availability – default replication of data to 3 nodes, rack and 
-                     datacenter-awareness, no single-points of failure
+★★★ Availability – replicação padrão de dados para 3 nós, rack e 
+                     reconhecimento do datacenter, sem pontos únicos de falha
 ```
 
 ### Smart Decision 1 - Design
