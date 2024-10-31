@@ -107,7 +107,7 @@ resultado: 10 ★
 A arquitetura Lambda combina processamento em batch e em tempo real, permitindo análises históricas e operacionais na mesma solução. 
 A camada de batch é baseada em técnicas não relacionais, enquanto a camada de velocidade utiliza streaming para análises em tempo real.
 
-A carta de Data Refinery em relação aos nossos drivers, no jogo:
+A carta de Lambda Architecture em relação aos nossos drivers, no jogo:
 ```python
 ★★ ½ Análise ad-hoc - o suporte a consultas em tempo real ad-hoc é mais difícil do que na arquitetura relacional
 
